@@ -1,0 +1,14 @@
+# Build Folders
+[Bb]in/
+[Oo]bj/
+
+# Artifacts
+*.dll
+*.pdb
+*.nupkg
+*.user
+*.suo
+
+# IDEs
+.idea/
+.vs/
