@@ -16,7 +16,12 @@ public class MessageApi
     /// </summary>
     public static void RemoveServerMessage()
     {
-        if (ZeepkistNetwork.NetworkClient != null && ZeepkistNetwork.CurrentLobby?.GameState == 1)
+        if (ZeepkistNetwork.NetworkClient == null)
+        {
+            return;
+        }
+
+        if (ZeepkistNetwork.CurrentLobby?.GameState == 1)
         {
             ChatApi.SendMessage("/servermessage remove");
         }
@@ -30,7 +35,12 @@ public class MessageApi
     /// <param name="duration">The duration in seconds (0 for default).</param>
     public static void SetServerMessage(string message, MessageColor color = MessageColor.White, int duration = 0)
     {
-        if (ZeepkistNetwork.NetworkClient != null && ZeepkistNetwork.CurrentLobby?.GameState == 1)
+        if (ZeepkistNetwork.NetworkClient == null)
+        {
+            return;
+        }
+
+        if (ZeepkistNetwork.CurrentLobby?.GameState == 1)
         {
             ChatApi.SendMessage($"/servermessage {color} {duration} {message}");
         }
@@ -61,7 +71,7 @@ public class MessageApi
     /// <param name="steamIds">The list of Steam IDs to send the message to.</param>
     public static void SendPrivateCustomChatMessage(string message, string tag = "HOST", params ulong[] steamIds)
     {
-        if (ZeepkistNetwork.NetworkClient != null)
+        if (ZeepkistNetwork.NetworkClient == null)
         {
             return;
         }
@@ -79,7 +89,7 @@ public class MessageApi
     /// <param name="tag">The tag to display (default "HOST").</param>
     public static void SendBroadcastCustomChatMessageTo(string message, string tag = "HOST")
     {
-        if (ZeepkistNetwork.NetworkClient != null)
+        if (ZeepkistNetwork.NetworkClient == null)
         {
             return;
         }
