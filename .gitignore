@@ -8,6 +8,7 @@
 *.nupkg
 *.user
 *.suo
+*.csproj
 
 # IDEs
 .idea/
