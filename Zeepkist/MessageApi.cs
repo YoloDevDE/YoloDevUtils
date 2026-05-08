@@ -113,20 +113,28 @@ public enum MessageColor
 {
     /// <summary>Red color.</summary>
     Red,
+
     /// <summary>Orange color.</summary>
     Orange,
+
     /// <summary>Yellow color.</summary>
     Yellow,
+
     /// <summary>Blue color.</summary>
     Blue,
+
     /// <summary>Green color.</summary>
     Green,
+
     /// <summary>Pink color.</summary>
     Pink,
+
     /// <summary>Purple color.</summary>
     Purple,
+
     /// <summary>Black color.</summary>
     Black,
+
     /// <summary>White color.</summary>
     White
 }

@@ -19,12 +19,16 @@ public class TMPRichTextBuilder
     {
         /// <summary>Aligns text to the left.</summary>
         Left,
+
         /// <summary>Aligns text to the center.</summary>
         Center,
+
         /// <summary>Aligns text to the right.</summary>
         Right,
+
         /// <summary>Justifies the text.</summary>
         Justify,
+
         /// <summary>Flushes the text.</summary>
         Flush
     }
@@ -36,8 +40,10 @@ public class TMPRichTextBuilder
     {
         /// <summary>Apply margin to the left side.</summary>
         Left,
+
         /// <summary>Apply margin to the right side.</summary>
         Right,
+
         /// <summary>Apply margin to both sides.</summary>
         Both
     }
@@ -49,12 +55,16 @@ public class TMPRichTextBuilder
     {
         /// <summary>A positive relative value.</summary>
         Plus,
+
         /// <summary>A percentage value.</summary>
         Percent,
+
         /// <summary>Pixels value.</summary>
         Pixels,
+
         /// <summary>Em units value.</summary>
         Em,
+
         /// <summary>No unit specified.</summary>
         None
     }
@@ -66,12 +76,12 @@ public class TMPRichTextBuilder
     private readonly List<string> _openingTags = [];
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="TMPRichTextBuilder"/> class.
+    ///     Initializes a new instance of the <see cref="TMPRichTextBuilder" /> class.
     /// </summary>
     public TMPRichTextBuilder() { }
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="TMPRichTextBuilder"/> class with initial text.
+    ///     Initializes a new instance of the <see cref="TMPRichTextBuilder" /> class with initial text.
     /// </summary>
     /// <param name="text">The initial text to add.</param>
     public TMPRichTextBuilder(string text)
@@ -392,7 +402,7 @@ public class TMPRichTextBuilder
     public TMPRichTextBuilder Color(string color)
     {
         string hex = ColorUtils.ParseOrDefault(color).ToMinimizedHex();
-        _openingTags.Add($"<color={hex}>");
+        _openingTags.Add($"<{hex}>");
         _closingTags.Add("</color>");
         return this;
     }
@@ -437,9 +447,18 @@ public class TMPRichTextBuilder
         bool inTag = false;
         foreach (char c in text)
         {
-            if (c == '<') inTag = true;
-            else if (c == '>') inTag = false;
-            else if (!inTag) realChars++;
+            if (c == '<')
+            {
+                inTag = true;
+            }
+            else if (c == '>')
+            {
+                inTag = false;
+            }
+            else if (!inTag)
+            {
+                realChars++;
+            }
         }
 
         if (realChars == 0)
@@ -502,8 +521,12 @@ public class TMPRichTextBuilder
 
             if (hex != lastHex)
             {
-                if (lastHex != null) rebuilt.Append("</color>");
-                rebuilt.Append($"<color={hex}>");
+                if (lastHex != null)
+                {
+                    rebuilt.Append("</color>");
+                }
+
+                rebuilt.Append($"<{hex}>");
                 lastHex = hex;
             }
 

@@ -14,7 +14,7 @@ public static class ColorUtils
     /// </summary>
     /// <param name="input">The HTML hex string to parse.</param>
     /// <param name="fallback">The fallback color if parsing fails. Defaults to white.</param>
-    /// <returns>The parsed <see cref="Color"/> or the fallback.</returns>
+    /// <returns>The parsed <see cref="Color" /> or the fallback.</returns>
     public static Color ParseOrDefault(string input, Color? fallback = null)
     {
         if (string.IsNullOrWhiteSpace(input))
@@ -37,7 +37,7 @@ public static class ColorUtils
     /// <param name="g">Green component (0-255).</param>
     /// <param name="b">Blue component (0-255).</param>
     /// <param name="a">Alpha component (0-1).</param>
-    /// <returns>A new <see cref="Color"/>.</returns>
+    /// <returns>A new <see cref="Color" />.</returns>
     public static Color FromRGB(int r, int g, int b, float a = 1f) => new Color(r / 255f, g / 255f, b / 255f, Mathf.Clamp01(a));
 
     /// <summary>
@@ -47,7 +47,7 @@ public static class ColorUtils
     /// <param name="g">Green component (0-255).</param>
     /// <param name="b">Blue component (0-255).</param>
     /// <param name="a">Alpha component (0-255).</param>
-    /// <returns>A new <see cref="Color"/>.</returns>
+    /// <returns>A new <see cref="Color" />.</returns>
     public static Color FromRgba(int r, int g, int b, int a) => new Color(r / 255f, g / 255f, b / 255f, a / 255f);
 
     /// <summary>
@@ -55,7 +55,7 @@ public static class ColorUtils
     /// </summary>
     /// <param name="color">The source color.</param>
     /// <param name="a">The new alpha value (0-1).</param>
-    /// <returns>A new <see cref="Color"/> with the specified alpha.</returns>
+    /// <returns>A new <see cref="Color" /> with the specified alpha.</returns>
     public static Color WithAlpha(this Color color, float a) => new Color(color.r, color.g, color.b, Mathf.Clamp01(a));
 
     /// <summary>
@@ -63,7 +63,7 @@ public static class ColorUtils
     /// </summary>
     /// <param name="color">The source color.</param>
     /// <param name="factor">The factor to multiply alpha by.</param>
-    /// <returns>A new <see cref="Color"/> with faded alpha.</returns>
+    /// <returns>A new <see cref="Color" /> with faded alpha.</returns>
     public static Color Fade(this Color color, float factor) => new Color(color.r, color.g, color.b, Mathf.Clamp01(color.a * factor));
 
     // ─────────────────────────────────────────────────────────────
@@ -102,7 +102,7 @@ public static class ColorUtils
     /// <param name="a">The start color.</param>
     /// <param name="b">The end color.</param>
     /// <param name="t">The interpolation value (0-1).</param>
-    /// <returns>The interpolated <see cref="Color"/>.</returns>
+    /// <returns>The interpolated <see cref="Color" />.</returns>
     public static Color Lerp(Color a, Color b, float t) => Color.Lerp(a, b, Mathf.Clamp01(t));
 
     /// <summary>
@@ -110,7 +110,7 @@ public static class ColorUtils
     /// </summary>
     /// <param name="c">The source color.</param>
     /// <param name="factor">The factor to brighten by (0-1).</param>
-    /// <returns>The brightened <see cref="Color"/>.</returns>
+    /// <returns>The brightened <see cref="Color" />.</returns>
     public static Color Brighten(this Color c, float factor) => Color.Lerp(c, Color.white, Mathf.Clamp01(factor));
 
     /// <summary>
@@ -118,7 +118,7 @@ public static class ColorUtils
     /// </summary>
     /// <param name="c">The source color.</param>
     /// <param name="factor">The factor to darken by (0-1).</param>
-    /// <returns>The darkened <see cref="Color"/>.</returns>
+    /// <returns>The darkened <see cref="Color" />.</returns>
     public static Color Darken(this Color c, float factor) => Color.Lerp(c, Color.black, Mathf.Clamp01(factor));
 
     // ─────────────────────────────────────────────────────────────
@@ -129,13 +129,13 @@ public static class ColorUtils
     ///     Creates a random color with a specified alpha.
     /// </summary>
     /// <param name="a">The alpha value (0 to 1).</param>
-    /// <returns>A random <see cref="Color"/>.</returns>
+    /// <returns>A random <see cref="Color" />.</returns>
     public static Color RandomRGB(float a = 1f) => new Color(Random.value, Random.value, Random.value, Mathf.Clamp01(a));
 
     /// <summary>
     ///     Creates a random color with a random alpha.
     /// </summary>
-    /// <returns>A random <see cref="Color"/> with random alpha.</returns>
+    /// <returns>A random <see cref="Color" /> with random alpha.</returns>
     public static Color RandomRgba() => new Color(Random.value, Random.value, Random.value, Random.value);
 
     /// <summary>

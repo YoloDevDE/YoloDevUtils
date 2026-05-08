@@ -1,14 +1,17 @@
 # YoloDev.Utils
 
-A utility library for Unity and Zeepkist modding, providing a powerful fluent API for TextMeshPro (TMP) rich text generation, color manipulation, and game integration.
+A utility library for Unity and Zeepkist modding, providing a powerful fluent API for TextMeshPro (TMP) rich text
+generation, color manipulation, and game integration.
 
 ## Features
 
-- **TMPRichTextBuilder**: A fluent builder for creating complex TMP rich text strings with ease. Supports nesting, gradients, alignment, margins, and more.
-- **ColorUtils**: Advanced color parsing and manipulation. Includes a minimized hex converter specifically designed for TMP.
+- **TMPRichTextBuilder**: A fluent builder for creating complex TMP rich text strings with ease. Supports nesting,
+  gradients, alignment, margins, and more.
+- **ColorUtils**: Advanced color parsing and manipulation. Includes a minimized hex converter specifically designed for
+  TMP.
 - **Zeepkist Integration**:
-  - `MessageApi`: High-level wrapper for Zeepkist's message system (server messages, private chat, broadcast).
-  - `Emojis`: Constants and helpers for Zeepkist-specific TMP sprite tags.
+    - `MessageApi`: High-level wrapper for Zeepkist's message system (server messages, private chat, broadcast).
+    - `Emojis`: Constants and helpers for Zeepkist-specific TMP sprite tags.
 
 ## Installation
 
@@ -31,7 +34,7 @@ string styledText = new TMPRichTextBuilder("Important Message")
     .Bold()
     .Color("red")
     .Build();
-// Output: <color=#f00><b>Important Message</b></color>
+// Output: <#f00><b>Important Message</b></color>
 ```
 
 Add multiple layers and gradients:
@@ -68,13 +71,28 @@ MessageApi.SetServerMessage("Lobby challenge starting!", MessageColor.Orange, 10
 string heart = Emojis.Heart;
 ```
 
+### Toast Notifications
+
+Send toasts with automatic logging:
+
+```csharp
+using YoloDev.Zeepkist;
+
+// Initialize once (e.g., in Plugin Awake)
+ToastNotification.Initialize(this.Logger, "MyPluginTag");
+
+// Use anywhere
+ToastNotification.Success("Level Completed!");
+ToastNotification.Error("Failed to load data.");
+```
+
 ## Requirements
 
 - **Framework**: .NET Framework 4.7.2
 - **Dependencies**:
-  - UnityEngine.Modules (2021.3.33+)
-  - ZeepSDK (2.2.0+)
-  - Zeepkist.GameLibs
+    - UnityEngine.Modules (2021.3.33+)
+    - ZeepSDK (2.2.0+)
+    - Zeepkist.GameLibs
 
 ## Author
 
