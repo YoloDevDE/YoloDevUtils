@@ -206,11 +206,7 @@ public class TMPRichTextBuilder
     /// <param name="height">The height value.</param>
     /// <param name="type">The unit type for the height.</param>
     /// <returns>The builder instance.</returns>
-    public TMPRichTextBuilder LineHeight(int height, UnitType type = UnitType.Percent)
-    {
-        _openingTags.Insert(0, $"<line-height={WrapWithUnitType(height.ToString(), type)}>");
-        return this;
-    }
+    public TMPRichTextBuilder LineHeight(int height, UnitType type = UnitType.Percent) => SurroundWithTag("line-height", height.ToString(), type);
 
     /// <summary>
     ///     Sets the position offset for the next character.
@@ -396,7 +392,7 @@ public class TMPRichTextBuilder
     public TMPRichTextBuilder Color(string color)
     {
         string hex = ColorUtils.ParseOrDefault(color).ToMinimizedHex();
-        _openingTags.Add($"<{hex}>");
+        _openingTags.Add($"<color={hex}>");
         _closingTags.Add("</color>");
         return this;
     }
@@ -410,6 +406,7 @@ public class TMPRichTextBuilder
 
     /// <summary>
     ///     Applies a character-by-character gradient across the current content.
+    ///     Optimizes output by grouping characters with the same color.
     /// </summary>
     /// <param name="colors">The color stops for the gradient.</param>
     /// <returns>The builder instance.</returns>
@@ -435,16 +432,25 @@ public class TMPRichTextBuilder
             return this;
         }
 
-        int realChars = text.Count(c => c != '<');
+        // Improved character counting (skips tags)
+        int realChars = 0;
+        bool inTag = false;
+        foreach (char c in text)
+        {
+            if (c == '<') inTag = true;
+            else if (c == '>') inTag = false;
+            else if (!inTag) realChars++;
+        }
+
         if (realChars == 0)
         {
             return this;
         }
 
         int segments = stops.Count - 1;
-
         StringBuilder rebuilt = new StringBuilder();
         int visibleIndex = 0;
+        string lastHex = null;
 
         for (int i = 0; i < text.Length; i++)
         {
@@ -452,6 +458,13 @@ public class TMPRichTextBuilder
 
             if (ch == '<')
             {
+                // If we're inside a color block, close it before the tag
+                if (lastHex != null)
+                {
+                    rebuilt.Append("</color>");
+                    lastHex = null;
+                }
+
                 while (i < text.Length && text[i] != '>')
                 {
                     rebuilt.Append(text[i]);
@@ -464,13 +477,13 @@ public class TMPRichTextBuilder
 
             if (char.IsWhiteSpace(ch))
             {
-                rebuilt.Append(ch);
-                visibleIndex++;
-                continue;
+                // Optional: should whitespace be colored? 
+                // Usually yes for gradients to keep spacing consistent.
+                // But we don't increment visibleIndex if we want to skip them?
+                // Standard TMP gradient behavior usually counts them.
             }
 
             float pos = segments == 0 ? 0f : (float)visibleIndex / Mathf.Max(1, realChars - 1);
-
             float segFloat = pos * segments;
             int segIndex = Mathf.Clamp((int)Mathf.Floor(segFloat), 0, segments - 1);
             float t = Mathf.Clamp01(segFloat - segIndex);
@@ -487,9 +500,20 @@ public class TMPRichTextBuilder
 
             string hex = c.ToMinimizedHex();
 
-            rebuilt.Append($"<{hex}>{ch}</color>");
+            if (hex != lastHex)
+            {
+                if (lastHex != null) rebuilt.Append("</color>");
+                rebuilt.Append($"<color={hex}>");
+                lastHex = hex;
+            }
 
+            rebuilt.Append(ch);
             visibleIndex++;
+        }
+
+        if (lastHex != null)
+        {
+            rebuilt.Append("</color>");
         }
 
         _content.Clear();
@@ -505,29 +529,31 @@ public class TMPRichTextBuilder
     {
         StringBuilder result = new StringBuilder();
 
-        foreach (string tag in _innerOpeningTags)
-        {
-            result.Insert(0, tag);
-        }
-
+        // 1. Add opening tags in order (Outermost to Innermost)
         foreach (string tag in _openingTags)
         {
-            result.Insert(0, tag);
+            result.Append(tag);
         }
 
+        foreach (string tag in _innerOpeningTags)
+        {
+            result.Append(tag);
+        }
+
+        // 2. Add content
         result.Append(_content);
 
-        foreach (string tag in _innerClosingTags)
+        // 3. Add closing tags in reverse order (Innermost to Outermost)
+        for (int i = _innerClosingTags.Count - 1; i >= 0; i--)
         {
-            result.Append(tag);
+            result.Append(_innerClosingTags[i]);
         }
 
-        foreach (string tag in _closingTags)
+        for (int i = _closingTags.Count - 1; i >= 0; i--)
         {
-            result.Append(tag);
+            result.Append(_closingTags[i]);
         }
 
-        Debug.Log(result);
         return result.ToString();
     }
 }

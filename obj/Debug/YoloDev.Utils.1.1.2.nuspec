@@ -5,7 +5,7 @@
     <version>1.1.2</version>
     <authors>Hi Im Yolo</authors>
     <description>Rich Text Builder for TMP (Unity).</description>
-    <repository type="git" commit="0539d08a91d20486201bdcd839e66fa68c6592a0" />
+    <repository type="git" commit="d6a002a7ec57cca9258ec509387d8f7054bbecef" />
     <dependencies>
       <group targetFramework=".NETFramework4.7.2">
         <dependency id="UnityEngine.Modules" version="2021.3.33" exclude="Build,Analyzers" />

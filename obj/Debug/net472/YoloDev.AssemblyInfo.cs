@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("Rich Text Builder for TMP (Unity).")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.1.2.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.1.2+0539d08a91d20486201bdcd839e66fa68c6592a0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.1.2+d6a002a7ec57cca9258ec509387d8f7054bbecef")]
 [assembly: System.Reflection.AssemblyProductAttribute("YoloDev")]
 [assembly: System.Reflection.AssemblyTitleAttribute("YoloDev")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.1.2.0")]
