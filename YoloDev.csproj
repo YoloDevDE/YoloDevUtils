@@ -1,35 +1,35 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFramework>net472</TargetFramework>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.1.5</Version>
-        <Authors>Hi Im Yolo</Authors>
-        <PackageId>YoloDev.Utils</PackageId>
-        <Title>YoloDev Utils</Title>
-        <Description>A utility library for Unity and Zeepkist modding, providing a powerful fluent API for TextMeshPro (TMP) rich text generation, color manipulation, and game integration.</Description>
-        <PackageProjectUrl>https://github.com/YoloDevDE/YoloDevUtils</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/YoloDevDE/YoloDevUtils.git</RepositoryUrl>
-        <RepositoryType>git</RepositoryType>
-        <PackageTags>Unity;Zeepkist;TextMeshPro;TMP;Modding;RichText;Utility</PackageTags>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-        <LangVersion>latest</LangVersion>
-    </PropertyGroup>
-    <ItemGroup>
-        <None Include="README.md" Pack="true" PackagePath="\"/>
-    </ItemGroup>
-    <ItemGroup>
-        <PackageReference Include="UnityEngine.Modules" Version="2021.3.33"/>
-        <PackageReference Include="Zeepkist.GameLibs" Version="17.32.1912"/>
-        <PackageReference Include="ZeepSDK" Version="2.2.0"/>
-        <PackageReference Include="ZeepTourney" Version="0.0.5"/>
-    </ItemGroup>
-    <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
-        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all"/>
-    </ItemGroup>
-    <ItemGroup>
-        <Folder Include="Patches\"/>
-    </ItemGroup>
-    <Target Name="CopyPackage" AfterTargets="Pack">
-        <Copy SourceFiles="$(PackageOutputPath)\$(PackageId).$(Version).nupkg" DestinationFolder="E:\LocalNuget"/>
-    </Target>
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.1.6</Version>
+    <Authors>Hi Im Yolo</Authors>
+    <PackageId>YoloDev.Utils</PackageId>
+    <Title>YoloDev Utils</Title>
+    <Description>A utility library for Unity and Zeepkist modding, providing a powerful fluent API for TextMeshPro (TMP) rich text generation, color manipulation, and game integration.</Description>
+    <PackageProjectUrl>https://github.com/YoloDevDE/YoloDevUtils</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/YoloDevDE/YoloDevUtils.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Unity;Zeepkist;TextMeshPro;TMP;Modding;RichText;Utility</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="UnityEngine.Modules" Version="2021.3.33" />
+    <PackageReference Include="Zeepkist.GameLibs" Version="17.32.1912" />
+    <PackageReference Include="ZeepSDK" Version="2.2.0" />
+    <PackageReference Include="ZeepTourney" Version="0.0.5" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Patches\" />
+  </ItemGroup>
+  <Target Name="CopyPackage" AfterTargets="Pack">
+    <Copy SourceFiles="$(PackageOutputPath)\$(PackageId).$(Version).nupkg" DestinationFolder="E:\LocalNuget" />
+  </Target>
 </Project>
