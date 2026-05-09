@@ -94,6 +94,10 @@ ToastNotification.Error("Failed to load data.");
     - ZeepSDK (2.2.0+)
     - Zeepkist.GameLibs
 
+## Contributing
+
+Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on our branching strategy and development workflow.
+
 ## Author
 
 **Hi Im Yolo**

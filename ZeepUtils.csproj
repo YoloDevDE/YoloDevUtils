@@ -29,7 +29,7 @@
     <ItemGroup>
         <Folder Include="Patches\"/>
     </ItemGroup>
-    <Target Name="CopyPackage" AfterTargets="Pack">
+    <Target Name="CopyPackage" AfterTargets="Pack" Condition="Exists('E:\LocalNuget')">
         <Copy SourceFiles="$(PackageOutputPath)\$(PackageId).$(Version).nupkg" DestinationFolder="E:\LocalNuget"/>
     </Target>
 </Project>
