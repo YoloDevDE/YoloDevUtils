@@ -65,7 +65,7 @@ string tmpHex = myColor.ToMinimizedHex();
 using YoloDev.Zeepkist;
 
 // Set a server message with duration
-MessageApi.SetServerMessage("Lobby challenge starting!", MessageColor.Orange, 10);
+MessageApi.SetServerMessage("Lobby challenge starting!", MessageColor.orange, 10);
 
 // Use constants for emojis
 string heart = Emojis.Heart;

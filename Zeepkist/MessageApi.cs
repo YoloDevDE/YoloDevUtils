@@ -33,7 +33,7 @@ public class MessageApi
     /// <param name="message">The message text.</param>
     /// <param name="color">The color of the message.</param>
     /// <param name="duration">The duration in seconds (0 for default).</param>
-    public static void SetServerMessage(string message, MessageColor color = MessageColor.White, int duration = 0)
+    public static void SetServerMessage(string message, MessageColor color = MessageColor.white, int duration = 0)
     {
         if (ZeepkistNetwork.NetworkClient == null)
         {
@@ -60,7 +60,7 @@ public class MessageApi
         sb.Append("</color>");
         message = sb.ToString();
 
-        SetServerMessage(message, MessageColor.White, duration);
+        SetServerMessage(message, MessageColor.white, duration);
     }
 
     /// <summary>
@@ -102,7 +102,7 @@ public class MessageApi
     /// </summary>
     /// <param name="message">The message text.</param>
     /// <param name="color">The color of the message.</param>
-    public static void SetJoinMessage(string message, MessageColor color = MessageColor.White)
+    public static void SetJoinMessage(string message, MessageColor color = MessageColor.white)
     {
         ChatApi.SendMessage($"/joinmessage {color} {message}");
     }
@@ -122,29 +122,29 @@ public class MessageApi
 public enum MessageColor
 {
     /// <summary>Red color.</summary>
-    Red,
+    red,
 
     /// <summary>Orange color.</summary>
-    Orange,
+    orange,
 
     /// <summary>Yellow color.</summary>
-    Yellow,
+    yellow,
 
     /// <summary>Blue color.</summary>
-    Blue,
+    blue,
 
     /// <summary>Green color.</summary>
-    Green,
+    green,
 
     /// <summary>Pink color.</summary>
-    Pink,
+    pink,
 
     /// <summary>Purple color.</summary>
-    Purple,
+    purple,
 
     /// <summary>Black color.</summary>
-    Black,
+    black,
 
     /// <summary>White color.</summary>
-    White
+    white
 }
