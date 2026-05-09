@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.1.32</Version>
+    <Version>1.1.34</Version>
     <Authors>Hi Im Yolo</Authors>
     <PackageId>YoloDev.Utils</PackageId>
     <Title>YoloDev Utils</Title>
@@ -29,7 +29,7 @@
   <ItemGroup>
     <Folder Include="Patches\" />
   </ItemGroup>
-  <Target Name="AutoIncrementVersion" BeforeTargets="PrepareForBuild" Condition="'$(Configuration)' == 'Release' AND '$(AutoIncrementVersionRun)' != 'true'">
+  <Target Name="AutoIncrementVersion" BeforeTargets="PrepareForBuild" Condition="'$(AutoIncrementVersionRun)' != 'true'">
     <Exec Command="powershell.exe -ExecutionPolicy Bypass -File IncrementVersion.ps1" />
     <XmlPeek XmlInputPath="$(MSBuildProjectFile)" Query="//Version/text()">
       <Output TaskParameter="Result" PropertyName="Version" />
