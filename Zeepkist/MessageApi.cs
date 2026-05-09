@@ -16,15 +16,12 @@ public class MessageApi
     /// </summary>
     public static void RemoveServerMessage()
     {
-        if (ZeepkistNetwork.NetworkClient == null)
+        if (ZeepkistNetwork.NetworkClient == null || ZeepkistNetwork.CurrentLobby == null || ZeepkistNetwork.CurrentLobby.GameState != 0)
         {
             return;
         }
 
-        if (ZeepkistNetwork.CurrentLobby != null)
-        {
-            ChatApi.SendMessage("/servermessage remove");
-        }
+        ChatApi.SendMessage("/servermessage remove");
     }
 
     /// <summary>
@@ -35,15 +32,12 @@ public class MessageApi
     /// <param name="duration">The duration in seconds (0 for default).</param>
     public static void SetServerMessage(string message, MessageColor color = MessageColor.white, int duration = 0)
     {
-        if (ZeepkistNetwork.NetworkClient == null)
+        if (ZeepkistNetwork.NetworkClient == null || ZeepkistNetwork.CurrentLobby == null || ZeepkistNetwork.CurrentLobby.GameState != 0)
         {
             return;
         }
 
-        if (ZeepkistNetwork.CurrentLobby != null)
-        {
-            ChatApi.SendMessage($"/servermessage {color} {duration} {message}");
-        }
+        ChatApi.SendMessage($"/servermessage {color} {duration} {message}");
     }
 
     /// <summary>
