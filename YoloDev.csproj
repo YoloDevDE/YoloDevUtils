@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.1.407</Version>
+    <Version>1.1.408</Version>
     <Authors>Hi Im Yolo</Authors>
     <PackageId>YoloDev.Utils</PackageId>
     <Title>YoloDev Utils</Title>
