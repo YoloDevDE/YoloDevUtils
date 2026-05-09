@@ -8,6 +8,8 @@ if (Test-Path $projectFile) {
         $versionNode.InnerText = $newVersion.ToString()
         $xml.Save($projectFile)
         Write-Host "Version increased to $newVersion in $projectFile"
+        git add $projectFile
+        git commit -m "Auto-increment version to $newVersion"
     } else {
         Write-Error "Version node not found in $projectFile"
     }

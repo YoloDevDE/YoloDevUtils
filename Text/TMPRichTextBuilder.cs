@@ -244,6 +244,7 @@ public class TMPRichTextBuilder
 
     private TMPRichTextBuilder SurroundWithTag(string tag)
     {
+        tag = tag.ToLowerInvariant();
         _openingTags.Add($"<{tag}>");
         _closingTags.Add($"</{tag}>");
         return this;
@@ -251,6 +252,7 @@ public class TMPRichTextBuilder
 
     private TMPRichTextBuilder SurroundWithInnerTag(string tag)
     {
+        tag = tag.ToLowerInvariant();
         _innerOpeningTags.Add($"<{tag}>");
         _innerClosingTags.Add($"</{tag}>");
         return this;
@@ -258,6 +260,7 @@ public class TMPRichTextBuilder
 
     private TMPRichTextBuilder SurroundWithTag(string tag, string value, UnitType type)
     {
+        tag = tag.ToLowerInvariant();
         _openingTags.Add($"<{tag}={WrapWithUnitType(value.Trim(), type)}>");
         _closingTags.Add($"</{tag}>");
         return this;
