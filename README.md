@@ -1,4 +1,4 @@
-# YoloDev.Utils
+# ZeepUtils
 
 A utility library for Unity and Zeepkist modding, providing a powerful fluent API for TextMeshPro (TMP) rich text
 generation, color manipulation, and game integration.
@@ -18,7 +18,7 @@ generation, color manipulation, and game integration.
 This library is intended for use in C# projects targeting Unity (specifically Zeepkist).
 
 ```xml
-<PackageReference Include="YoloDev.Utils" Version="1.1.2" />
+<PackageReference Include="ZeepUtils" Version="1.1.2" />
 ```
 
 ## Usage
@@ -28,7 +28,7 @@ This library is intended for use in C# projects targeting Unity (specifically Ze
 Create styled text using a fluent interface:
 
 ```csharp
-using YoloDev.Text;
+using ZeepUtils.Text;
 
 string styledText = new TMPRichTextBuilder("Important Message")
     .Bold()
@@ -49,7 +49,7 @@ string gradientText = new TMPRichTextBuilder()
 ### Color Utilities
 
 ```csharp
-using YoloDev.Text;
+using ZeepUtils.Text;
 using UnityEngine;
 
 // Parse hex string with fallback
@@ -62,7 +62,7 @@ string tmpHex = myColor.ToMinimizedHex();
 ### Zeepkist Message API
 
 ```csharp
-using YoloDev.Zeepkist;
+using ZeepUtils.Zeepkist;
 
 // Set a server message with duration
 MessageApi.SetServerMessage("Lobby challenge starting!", MessageColor.orange, 10);
@@ -76,7 +76,7 @@ string heart = Emojis.Heart;
 Send toasts with automatic logging:
 
 ```csharp
-using YoloDev.Zeepkist;
+using ZeepUtils.Zeepkist;
 
 // Initialize once (e.g., in Plugin Awake)
 ToastNotification.Initialize(this.Logger, "MyPluginTag");

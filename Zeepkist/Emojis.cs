@@ -1,4 +1,4 @@
-namespace YoloDev.Text;
+namespace ZeepUtils.Text;
 
 /// <summary>
 ///     Contains constants for various TMP sprites used in Zeepkist.

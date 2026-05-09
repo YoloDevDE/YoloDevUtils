@@ -3,7 +3,7 @@ using BepInEx.Logging;
 using UnityEngine;
 using ZeepSDK.Messaging;
 
-namespace YoloDev.Zeepkist;
+namespace ZeepUtils.Zeepkist;
 
 /// <summary>
 ///     Provides methods for displaying toast notifications in Zeepkist, with integrated BepInEx logging.

@@ -1,10 +1,10 @@
 ﻿using System.Text;
 using UnityEngine;
-using YoloDev.Text;
+using ZeepUtils.Text;
 using ZeepkistClient;
 using ZeepSDK.Chat;
 
-namespace YoloDev.Zeepkist;
+namespace ZeepUtils.Zeepkist;
 
 /// <summary>
 ///     Provides methods for interacting with the Zeepkist message system.

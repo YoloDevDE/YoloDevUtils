@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace YoloDev.Text;
+namespace ZeepUtils.Text;
 
 public static class ColorUtils
 {
