@@ -38,7 +38,7 @@ public static class ColorUtils
     /// <param name="b">Blue component (0-255).</param>
     /// <param name="a">Alpha component (0-1).</param>
     /// <returns>A new <see cref="Color" />.</returns>
-    public static Color FromRGB(int r, int g, int b, float a = 1f) => new Color(r / 255f, g / 255f, b / 255f, Mathf.Clamp01(a));
+    public static Color FromRgb(int r, int g, int b, float a = 1f) => new Color(r / 255f, g / 255f, b / 255f, Mathf.Clamp01(a));
 
     /// <summary>
     ///     Create a color using RGBA 0–255.
@@ -75,7 +75,7 @@ public static class ColorUtils
     /// </summary>
     /// <param name="color">The color to convert.</param>
     /// <returns>A hex string representing the color.</returns>
-    public static string ToHexRGB(this Color color)
+    public static string ToHexRgb(this Color color)
     {
         Color32 c = color;
         return $"#{c.r:X2}{c.g:X2}{c.b:X2}";
@@ -130,7 +130,7 @@ public static class ColorUtils
     /// </summary>
     /// <param name="a">The alpha value (0 to 1).</param>
     /// <returns>A random <see cref="Color" />.</returns>
-    public static Color RandomRGB(float a = 1f) => new Color(Random.value, Random.value, Random.value, Mathf.Clamp01(a));
+    public static Color RandomRgb(float a = 1f) => new Color(Random.value, Random.value, Random.value, Mathf.Clamp01(a));
 
     /// <summary>
     ///     Creates a random color with a random alpha.
