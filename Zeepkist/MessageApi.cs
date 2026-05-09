@@ -21,7 +21,7 @@ public class MessageApi
             return;
         }
 
-        if (ZeepkistNetwork.CurrentLobby?.GameState == 1)
+        if (ZeepkistNetwork.CurrentLobby != null)
         {
             ChatApi.SendMessage("/servermessage remove");
         }
@@ -40,7 +40,7 @@ public class MessageApi
             return;
         }
 
-        if (ZeepkistNetwork.CurrentLobby?.GameState == 1)
+        if (ZeepkistNetwork.CurrentLobby != null)
         {
             ChatApi.SendMessage($"/servermessage {color} {duration} {message}");
         }
