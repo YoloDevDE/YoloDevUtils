@@ -33,6 +33,17 @@ public class TMPRichTextBuilder
         Flush
     }
 
+    public enum FontType
+    {
+        Default,
+        Anton,
+        Bangers,
+        LiberationSans,
+        ElectronicHighwaySign,
+        OswaldBold,
+        RobotoBold
+    }
+
     /// <summary>
     ///     Specifies which side of the margin to apply.
     /// </summary>
@@ -46,17 +57,6 @@ public class TMPRichTextBuilder
 
         /// <summary>Apply margin to both sides.</summary>
         Both
-    }
-    
-    public enum FontType
-    {
-        Default,
-        Anton,
-        Bangers,
-        LiberationSans,
-        ElectronicHighwaySign,
-        OswaldBold,
-        RobotoBold
     }
 
     /// <summary>

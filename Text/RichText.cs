@@ -80,15 +80,10 @@ public class RichText
         None
     }
 
-    private struct Tag
-    {
-        public string Open;
-        public string Close;
-    }
-
-    private readonly List<Tag> _tags = new();
-    private readonly List<Tag> _innerTags = new();
     private readonly StringBuilder _content = new StringBuilder();
+    private readonly List<Tag> _innerTags = new List<Tag>();
+
+    private readonly List<Tag> _tags = new List<Tag>();
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="RichText" /> class.
@@ -106,14 +101,13 @@ public class RichText
 
     private static string AlignmentTypeToString(AlignmentType align) => align.ToString().ToLowerInvariant();
 
-    private static string MarginTypeToString(MarginType marginType) =>
-        marginType switch
-        {
-            MarginType.Left => "margin-left",
-            MarginType.Right => "margin-right",
-            MarginType.Both => "margin",
-            _ => throw new ArgumentOutOfRangeException(nameof(marginType), marginType, null)
-        };
+    private static string MarginTypeToString(MarginType marginType) => marginType switch
+    {
+        MarginType.Left => "margin-left",
+        MarginType.Right => "margin-right",
+        MarginType.Both => "margin",
+        _ => throw new ArgumentOutOfRangeException(nameof(marginType), marginType, null)
+    };
 
     private static string FontTypeToString(FontType font)
     {
@@ -144,7 +138,9 @@ public class RichText
     /// <summary>Appends raw text to the builder.</summary>
     /// <param name="text">The text to append.</param>
     /// <returns>The builder instance.</returns>
-    /// <example><code>builder.Append("Hello").Build(); // "Hello"</code></example>
+    /// <example>
+    ///     <code>builder.Append("Hello").Build(); // "Hello"</code>
+    /// </example>
     public RichText Append(string text)
     {
         _content.Append(text);
@@ -206,13 +202,17 @@ public class RichText
 
     /// <summary>Makes the content bold.</summary>
     /// <returns>The builder instance.</returns>
-    /// <example><code>builder.Append("Hello").Bold().Build(); // "&lt;b&gt;Hello&lt;/b&gt;"</code></example>
+    /// <example>
+    ///     <code>builder.Append("Hello").Bold().Build(); // "&lt;b&gt;Hello&lt;/b&gt;"</code>
+    /// </example>
     public RichText Bold() => SurroundWithTag("b");
 
     /// <summary>Appends bold text to the builder.</summary>
     /// <param name="text">The text to append.</param>
     /// <returns>The builder instance.</returns>
-    /// <example><code>builder.Bold("Hello").Build(); // "&lt;b&gt;Hello&lt;/b&gt;"</code></example>
+    /// <example>
+    ///     <code>builder.Bold("Hello").Build(); // "&lt;b&gt;Hello&lt;/b&gt;"</code>
+    /// </example>
     public RichText Bold(string text) => Append(text, b => b.Bold());
 
     /// <summary>Makes the content italic.</summary>
@@ -477,7 +477,9 @@ public class RichText
     /// </summary>
     /// <param name="color">The color to apply (hex or name).</param>
     /// <returns>The builder instance.</returns>
-    /// <example><code>builder.Append("Red").Color("red").Build(); // "&lt;#f00&gt;Red&lt;/color&gt;"</code></example>
+    /// <example>
+    ///     <code>builder.Append("Red").Color("red").Build(); // "&lt;#f00&gt;Red&lt;/color&gt;"</code>
+    /// </example>
     public RichText Color(string color)
     {
         string hex = ColorUtils.ParseOrDefault(color).ToMinimizedHex();
@@ -489,7 +491,9 @@ public class RichText
     /// <param name="text">The text to append.</param>
     /// <param name="color">The color to apply.</param>
     /// <returns>The builder instance.</returns>
-    /// <example><code>builder.Color("Blue", "#00f").Build(); // "&lt;#00f&gt;Blue&lt;/color&gt;"</code></example>
+    /// <example>
+    ///     <code>builder.Color("Blue", "#00f").Build(); // "&lt;#00f&gt;Blue&lt;/color&gt;"</code>
+    /// </example>
     public RichText Color(string text, string color) => Append(text, b => b.Color(color));
 
     /// <summary>
@@ -511,7 +515,9 @@ public class RichText
     /// </summary>
     /// <param name="colors">The color stops for the gradient.</param>
     /// <returns>The builder instance.</returns>
-    /// <example><code>builder.Append("Rainbow").ColorGradient("red", "green", "blue").Build();</code></example>
+    /// <example>
+    ///     <code>builder.Append("Rainbow").ColorGradient("red", "green", "blue").Build();</code>
+    /// </example>
     public RichText ColorGradient(params string[] colors)
     {
         if (colors == null || colors.Length == 0)
@@ -615,10 +621,20 @@ public class RichText
         bool inTag = false;
         foreach (char c in text)
         {
-            if (c == '<') inTag = true;
-            else if (c == '>') inTag = false;
-            else if (!inTag) count++;
+            if (c == '<')
+            {
+                inTag = true;
+            }
+            else if (c == '>')
+            {
+                inTag = false;
+            }
+            else if (!inTag)
+            {
+                count++;
+            }
         }
+
         return count;
     }
 
@@ -636,15 +652,29 @@ public class RichText
         StringBuilder result = new StringBuilder();
 
         // 1. Add opening tags (Outermost to Innermost)
-        foreach (Tag tag in _tags) result.Append(tag.Open);
-        foreach (Tag tag in _innerTags) result.Append(tag.Open);
+        foreach (Tag tag in _tags)
+        {
+            result.Append(tag.Open);
+        }
+
+        foreach (Tag tag in _innerTags)
+        {
+            result.Append(tag.Open);
+        }
 
         // 2. Add content
         result.Append(_content);
 
         // 3. Add closing tags in reverse order (Innermost to Outermost)
-        for (int i = _innerTags.Count - 1; i >= 0; i--) result.Append(_innerTags[i].Close);
-        for (int i = _tags.Count - 1; i >= 0; i--) result.Append(_tags[i].Close);
+        for (int i = _innerTags.Count - 1; i >= 0; i--)
+        {
+            result.Append(_innerTags[i].Close);
+        }
+
+        for (int i = _tags.Count - 1; i >= 0; i--)
+        {
+            result.Append(_tags[i].Close);
+        }
 
         return result.ToString();
     }
@@ -665,5 +695,11 @@ public class RichText
         _tags.Clear();
         _innerTags.Clear();
         return this;
+    }
+
+    private struct Tag
+    {
+        public string Open;
+        public string Close;
     }
 }
