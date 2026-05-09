@@ -1,8 +1,8 @@
 ﻿using System.Text;
 using UnityEngine;
+using ZeepUtils.Text;
 using ZeepkistClient;
 using ZeepSDK.Chat;
-using ZeepUtils.Text;
 
 namespace ZeepUtils.Zeepkist;
 
@@ -11,12 +11,16 @@ namespace ZeepUtils.Zeepkist;
 /// </summary>
 public class MessageApi
 {
+    private static bool IsInLobby => ZeepkistNetwork.NetworkClient != null &&
+                                     ZeepkistNetwork.CurrentLobby != null &&
+                                     ZeepkistNetwork.CurrentLobby.GameState == 0;
+
     /// <summary>
     ///     Removes the current server message if in a valid game state.
     /// </summary>
     public static void RemoveServerMessage()
     {
-        if (ZeepkistNetwork.NetworkClient == null || ZeepkistNetwork.CurrentLobby == null || ZeepkistNetwork.CurrentLobby.GameState != 0)
+        if (!IsInLobby)
         {
             return;
         }
@@ -30,14 +34,14 @@ public class MessageApi
     /// <param name="message">The message text.</param>
     /// <param name="color">The color of the message.</param>
     /// <param name="duration">The duration in seconds (0 for default).</param>
-    public static void SetServerMessage(string message, MessageColor color = MessageColor.white, int duration = 0)
+    public static void SetServerMessage(string message, MessageColor color = MessageColor.White, int duration = 0)
     {
-        if (ZeepkistNetwork.NetworkClient == null || ZeepkistNetwork.CurrentLobby == null || ZeepkistNetwork.CurrentLobby.GameState != 0)
+        if (!IsInLobby)
         {
             return;
         }
 
-        ChatApi.SendMessage($"/servermessage {color} {duration} {message}");
+        ChatApi.SendMessage($"/servermessage {color.ToString().ToLowerInvariant()} {duration} {message}");
     }
 
     /// <summary>
@@ -54,7 +58,7 @@ public class MessageApi
         sb.Append("</color>");
         message = sb.ToString();
 
-        SetServerMessage(message, MessageColor.white, duration);
+        SetServerMessage(message, MessageColor.White, duration);
     }
 
     /// <summary>
@@ -96,9 +100,14 @@ public class MessageApi
     /// </summary>
     /// <param name="message">The message text.</param>
     /// <param name="color">The color of the message.</param>
-    public static void SetJoinMessage(string message, MessageColor color = MessageColor.white)
+    public static void SetJoinMessage(string message, MessageColor color = MessageColor.White)
     {
-        ChatApi.SendMessage($"/joinmessage {color} {message}");
+        if (!IsInLobby)
+        {
+            return;
+        }
+
+        ChatApi.SendMessage($"/joinmessage {color.ToString().ToLowerInvariant()} {message}");
     }
 
     /// <summary>
@@ -106,6 +115,11 @@ public class MessageApi
     /// </summary>
     public static void RemoveJoinMessage()
     {
+        if (!IsInLobby)
+        {
+            return;
+        }
+
         ChatApi.SendMessage("/joinmessage disable");
     }
 }
@@ -116,29 +130,29 @@ public class MessageApi
 public enum MessageColor
 {
     /// <summary>Red color.</summary>
-    red,
+    Red,
 
     /// <summary>Orange color.</summary>
-    orange,
+    Orange,
 
     /// <summary>Yellow color.</summary>
-    yellow,
+    Yellow,
 
     /// <summary>Blue color.</summary>
-    blue,
+    Blue,
 
     /// <summary>Green color.</summary>
-    green,
+    Green,
 
     /// <summary>Pink color.</summary>
-    pink,
+    Pink,
 
     /// <summary>Purple color.</summary>
-    purple,
+    Purple,
 
     /// <summary>Black color.</summary>
-    black,
+    Black,
 
     /// <summary>White color.</summary>
-    white
+    White
 }

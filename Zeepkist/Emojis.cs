@@ -1,4 +1,6 @@
-namespace ZeepUtils.Text;
+using ZeepUtils.Text;
+
+namespace ZeepUtils.Zeepkist;
 
 /// <summary>
 ///     Contains constants for various TMP sprites used in Zeepkist.

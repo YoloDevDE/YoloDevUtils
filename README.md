@@ -5,7 +5,7 @@ generation, color manipulation, and game integration.
 
 ## Features
 
-- **TMPRichTextBuilder**: A fluent builder for creating complex TMP rich text strings with ease. Supports nesting,
+- **RichText**: A fluent builder for creating complex TMP rich text strings with ease. Supports nesting,
   gradients, alignment, margins, and more.
 - **ColorUtils**: Advanced color parsing and manipulation. Includes a minimized hex converter specifically designed for
   TMP.
@@ -23,14 +23,14 @@ This library is intended for use in C# projects targeting Unity (specifically Ze
 
 ## Usage
 
-### TMPRichTextBuilder
+### RichText
 
 Create styled text using a fluent interface:
 
 ```csharp
 using ZeepUtils.Text;
 
-string styledText = new TMPRichTextBuilder("Important Message")
+string styledText = new RichText("Important Message")
     .Bold()
     .Color("red")
     .Build();
@@ -40,7 +40,7 @@ string styledText = new TMPRichTextBuilder("Important Message")
 Add multiple layers and gradients:
 
 ```csharp
-string gradientText = new TMPRichTextBuilder()
+string gradientText = new RichText()
     .AddLayer("Cool Gradient")
     .ColorGradient("red", "yellow", "green")
     .Build();
@@ -65,7 +65,7 @@ string tmpHex = myColor.ToMinimizedHex();
 using ZeepUtils.Zeepkist;
 
 // Set a server message with duration
-MessageApi.SetServerMessage("Lobby challenge starting!", MessageColor.orange, 10);
+MessageApi.SetServerMessage("Lobby challenge starting!", MessageColor.Orange, 10);
 
 // Use constants for emojis
 string heart = Emojis.Heart;
